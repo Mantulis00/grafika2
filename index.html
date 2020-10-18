@@ -1,0 +1,194 @@
+<script>
+  var context;
+
+
+
+  function init(u)
+  {
+	  	context = mainCanvas.getContext('2d');
+
+	  
+
+	  var x = mainCanvas.width/2;
+	  var y = mainCanvas.height/2;
+	  
+	
+	  if (u == 1)
+	   anim1(x,y, context);
+   else if (u==2)
+	   anim2(x,y, context);
+    else if (u==3)
+	  anim3(x,y, context);
+   else if (u==4)
+	  anim4(x,y, context);
+	
+  }
+  
+  function DrawLines()
+  {
+	  	   context.lineWidth = 1;
+	  context.strokeRect(mainCanvas.width/2, 0, 0, mainCanvas.height);
+	  context.strokeRect(0, mainCanvas.height/2, mainCanvas.width, 0);
+  }
+  
+  function anim1(x,y, context)
+  {
+	    context.translate(0, 0);
+		var rot = 0;
+		var disx = 0, dixy = 0;
+		var speedRot = 5, speedX = mainCanvas.width/2/18, speedY = mainCanvas.height/2/18;
+		var time = 0, times = 18;
+		var scaleSpeed = 0.5/times;
+		
+		
+	setInterval(function() 
+	{
+		if (time == 19) return 0;
+				
+		context.fillStyle = '#ffffff';
+		context.fillRect(-x, -y, x*4, y*4);
+
+		
+		context.save();
+		context.translate(speedX*time, 1);
+		context.scale(1-scaleSpeed * time, 1-scaleSpeed * time);
+		context.fillStyle = '#ff0000';
+		//context.rotate(Math.PI * speedRot*time /180);
+		LetterL(0, 0, x*2, "FF0000", context);
+
+		time++;
+		context.restore();	
+		//x+=10;
+
+		}, 50);	
+  }
+  
+    function anim2(x,y, context)
+  {
+	    context.translate(0, 0);
+		var rot = 0;
+		var disx = 0, dixy = 0;
+		var speedRot = 5, speedX = mainCanvas.width/2/18, speedY = mainCanvas.height/2/18;
+		var time = 0, times = 18;
+		var scaleSpeed = 0.5/times;
+		
+	setInterval(function() 
+	{
+		if (time == 19) return 0;
+				
+		context.fillStyle = '#ffffff';
+		context.fillRect(0, 0, x*2, y*2);
+		
+		context.save();
+		context.translate(speedX * time*2, speedY*time);
+		
+		context.scale(1-scaleSpeed * time, 1-scaleSpeed * time);
+		context.rotate(Math.PI * speedRot*time /180);
+		context.fillStyle = '#00FF00';
+		LetterL(0, 0, x*2, "FF0000", context);
+
+		time++;
+		context.restore();	
+		//x+=10;
+
+		}, 50);	
+  }
+  
+      function anim3(x,y, context)
+  {
+	    context.translate(0, 0, context);
+		
+		var time = 0, times = 18;
+		var rot = 0;
+		var disx = 0, dixy = 0;
+		var speedRot = 5, speedX = mainCanvas.width/2/times, speedY = mainCanvas.height/2/times;
+		var scaleSpeed = 2/times, scaleSpeed2 = 0.5/times;
+		
+	setInterval(function() 
+	{
+		if (time == times + 1) return;
+				
+		context.fillStyle = '#ffffff';
+		context.fillRect(0, 0, x*2, y*2);
+		
+		context.save();
+		context.translate(speedX * time, speedY*time);
+		
+		context.fillStyle = '#0000FF';
+		//context.rotate(Math.PI * speedRot*time /180);
+		context.scale(1-scaleSpeed * time, 1);
+		context.scale(1-scaleSpeed2 * time, 1-scaleSpeed2 * time);
+		
+		LetterL(0, 0, x*2, "0000FF", context);
+
+		time++;
+		context.restore();	
+		//x+=10;
+
+		}, 50);	
+  }
+  
+       function anim4(x,y, context)
+  {
+	    context.translate(0, 0, context);
+		
+		var time = 0, times = 18;
+		var rot = 0;
+		var disx = 0, dixy = 0;
+		var speedRot = 5, speedX = mainCanvas.width/2/times, speedY = mainCanvas.height/2/times;
+		var scaleSpeed = 2/times, scaleSpeed2 = 0.75/times;
+		
+	setInterval(function() 
+	{
+		if (time == times + 1) return;
+				
+		context.fillStyle = '#ffffff';
+		context.fillRect(0, 0, x*2, y*2);
+		
+		context.save();
+		context.translate(speedX * time, speedY * time/2);
+		
+		context.fillStyle = '#FF00FF';
+		//context.rotate(Math.PI * speedRot*time /180);
+		context.scale(1-scaleSpeed * time, 1);
+		context.scale(1-scaleSpeed2 * time, 1-scaleSpeed2 * time);
+		
+		LetterL(0, 0, x*2, "FF00FF", context);
+
+		time++;
+		context.restore();	
+		//x+=10;
+
+		}, 50);	
+  }
+  
+  
+  
+  
+  
+  
+  function LetterL(x, y, size, color, context)
+{
+
+	context.fillStyle = color;
+	context.fillRect(x, y, size/2, size);
+	context.fillRect(x + size/2, y + size/2, size/2, size/2);
+	
+	context.fillStyle = '#ffffff';
+	context.fillRect(x+size/3, y, size/3*2, size/5*4);
+	
+}
+  
+ 
+	
+
+  
+</script>
+
+<body onLoad="init();">
+	<canvas id ="mainCanvas" width="800" height="800" ></canvas>
+	<input type="button" onclick="init(1)" value="U2" />
+	<input type="button" onclick="init(2)" value="B2" />
+	<input type="button" onclick="init(3)" value="B1" />
+	<input type="button" onclick="init(4)" value="U1" />
+</body>
