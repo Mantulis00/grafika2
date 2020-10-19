@@ -6,14 +6,16 @@
   function init(u)
   {
 	  	context = mainCanvas.getContext('2d');
-
+		context.resetTransform();
 	  
 
 	  var x = mainCanvas.width/2;
 	  var y = mainCanvas.height/2;
+	  context.fillStyle = "000000";
 	  
-	
-	  if (u == 1)
+	if (u==0)
+		LetterL(0, 0, x*2, "FF0000", context);
+	else if (u == 1)
 	   anim1(x,y, context);
    else if (u==2)
 	   anim2(x,y, context);
@@ -21,6 +23,8 @@
 	  anim3(x,y, context);
    else if (u==4)
 	  anim4(x,y, context);
+
+	  //context.restore();
 	
   }
   
@@ -70,7 +74,7 @@
 		var disx = 0, dixy = 0;
 		var speedRot = 5, speedX = mainCanvas.width/2/18, speedY = mainCanvas.height/2/18;
 		var time = 0, times = 18;
-		var scaleSpeed = 0.5/times;
+		var scaleSpeed = 0.5/times, scaleSpeed2 = 2/times;
 		
 	setInterval(function() 
 	{
@@ -83,6 +87,7 @@
 		context.translate(speedX * time*2, speedY*time);
 		
 		context.scale(1-scaleSpeed * time, 1-scaleSpeed * time);
+		//context.scale(1-scaleSpeed2 * time, 1);
 		context.rotate(Math.PI * speedRot*time /180);
 		context.fillStyle = '#00FF00';
 		LetterL(0, 0, x*2, "FF0000", context);
@@ -162,6 +167,7 @@
 		}, 50);	
   }
   
+ 
   
   
   
@@ -176,7 +182,7 @@
 	
 	context.fillStyle = '#ffffff';
 	context.fillRect(x+size/3, y, size/3*2, size/5*4);
-	
+	context.fillStyle = '#000000';
 }
   
  
@@ -185,10 +191,12 @@
   
 </script>
 
-<body onLoad="init();">
+<body onLoad="init(0);">
 	<canvas id ="mainCanvas" width="800" height="800" ></canvas>
 	<input type="button" onclick="init(1)" value="U2" />
 	<input type="button" onclick="init(2)" value="B2" />
 	<input type="button" onclick="init(3)" value="B1" />
 	<input type="button" onclick="init(4)" value="U1" />
+
+	<input type="button" onclick="init(0)" value="Reset" />
 </body>
